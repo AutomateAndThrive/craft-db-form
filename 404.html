@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Redirecting...</title>
+  <script type="text/javascript">
+    // This script handles the redirect from Supabase auth on GitHub Pages.
+    // It takes the session information from the URL fragment
+    // and redirects to the main index.html page.
+    (function() {
+      const redirect = sessionStorage.getItem('redirectPath');
+      sessionStorage.removeItem('redirectPath');
+      // If there's a hash (the part after #), it contains the auth token.
+      // We pass this along to the main page.
+      if (window.location.hash) {
+        window.location.href = `/?${window.location.hash.substring(1)}`;
+      } else {
+        window.location.href = '/';
+      }
+    })();
+  </script>
+</head>
+<body>
+  <p>If you are not redirected automatically, follow this <a href="/">link to the main page</a>.</p>
+</body>
+</html>
