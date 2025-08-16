@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Project</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="w-full max-w-2xl bg-white p-8 rounded-lg shadow-md">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-2xl font-bold text-gray-800">Add New Craft Project</h1>
+            <button id="loadButton" class="bg-green-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-700 transition duration-300">
+                Load from Clipboard
+            </button>
+        </div>
+        <form id="projectForm">
+            <div class="mb-4">
+                <label for="projectName" class="block text-gray-700 font-semibold mb-2">Project Name</label>
+                <input type="text" id="projectName" name="projectName" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            </div>
+            <div class="mb-6">
+                <label for="sourceUrl" class="block text-gray-700 font-semibold mb-2">Source URL</label>
+                <input type="url" id="sourceUrl" name="sourceUrl" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            </div>
+            <div class="text-right">
+                <button type="submit" class="bg-blue-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-blue-700 transition duration-300">Save to Database</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('loadButton').addEventListener('click', async () => {
+            try {
+                // Use the Clipboard API to read text
+                const text = await navigator.clipboard.readText();
+                // The bookmarklet separates the title and URL with a '|||'
+                const parts = text.split('|||');
+                if (parts.length === 2) {
+                    document.getElementById('projectName').value = parts[0];
+                    document.getElementById('sourceUrl').value = parts[1];
+                } else {
+                    alert('Clipboard data is not in the correct format.');
+                }
+            } catch (err) {
+                console.error('Failed to read clipboard contents: ', err);
+                alert('Could not read from clipboard. Please make sure you have granted permission if prompted.');
+            }
+        });
+    </script>
+</body>
+</html>
+
