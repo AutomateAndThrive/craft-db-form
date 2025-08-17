@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Redirecting...</title>
+  <script type="text/javascript">
+    // This script handles the redirect from Supabase auth on GitHub Pages.
+    // It captures the authentication hash from the URL and forwards it
+    // to the main index.html page.
+    (function() {
+      // The name of your repository, which is part of the URL path.
+      const repoName = 'craft-db-form';
+      
+      // Construct the correct redirect path, preserving the hash.
+      const redirectUrl = `/${repoName}/${window.location.hash}`;
+      
+      // Redirect to the index page with the auth hash.
+      window.location.href = redirectUrl;
+    })();
+  </script>
+</head>
+<body>
+  <p>Redirecting...</p>
+</body>
+</html>
