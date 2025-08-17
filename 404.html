@@ -5,21 +5,22 @@
   <script type="text/javascript">
     // This script handles the redirect from Supabase auth on GitHub Pages.
     // It takes the session information from the URL fragment
-    // and redirects to the main index.html page.
+    // and redirects to the main index.html page within the correct repository.
     (function() {
-      const redirect = sessionStorage.getItem('redirectPath');
-      sessionStorage.removeItem('redirectPath');
-      // If there's a hash (the part after #), it contains the auth token.
+      // The name of your repository.
+      const repoName = 'craft-db-form';
+
+      // If there's a hash, it contains the auth token.
       // We pass this along to the main page.
       if (window.location.hash) {
-        window.location.href = `/?${window.location.hash.substring(1)}`;
+        window.location.href = `/${repoName}/?${window.location.hash.substring(1)}`;
       } else {
-        window.location.href = '/';
+        window.location.href = `/${repoName}/`;
       }
     })();
   </script>
 </head>
 <body>
-  <p>If you are not redirected automatically, follow this <a href="/">link to the main page</a>.</p>
+  <p>If you are not redirected automatically, follow this <a href="/craft-db-form/">link to the main page</a>.</p>
 </body>
 </html>
